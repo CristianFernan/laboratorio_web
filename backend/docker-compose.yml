@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on: 
+      -db
+    ports:
+      - “3000:3000”
+    enviroment:
+    - NODE_ENV=${NODE_ENV}
+    - MONGO_URI=${MONGO_URI}
+    - PORTS=${PORT}
+    - JWT_SECRET=${JWT_SECRET}
+
+sb:
+  image: mongo:8.0.3
+  volumes: 
+    - mongo-data:/data/db
+
+volumes:
+  mongo-data:
